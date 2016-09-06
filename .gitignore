@@ -1,5 +1,6 @@
 server/ssl
-server/typings
+typings
+public/**/*
 
 # Logs
 logs
