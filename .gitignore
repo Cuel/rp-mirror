@@ -1,3 +1,6 @@
+server/ssl
+server/typings
+
 # Logs
 logs
 *.log

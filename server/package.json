@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "typings install",
+    "generate-cert": "node bin/generate-ssl",
+    "start": "ts-node ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "ts-node": "^1.3.0",
+    "typescript": "^1.8.10"
+  },
+  "devDependencies": {
+    "pem": "^1.8.3",
+    "typings": "^1.3.2"
+  }
+}

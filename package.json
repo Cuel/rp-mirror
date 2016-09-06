@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "install": "npm run install-client & npm run install-server",
+    "install-client": "cd client; npm i",
+    "install-server": "cd server; npm i",
+    "start": "cd server; npm start"
+  },
+  "dependencies": {
+    "chokidar": "^1.6.0"
+  }
+}

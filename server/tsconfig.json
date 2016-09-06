@@ -1,0 +1,29 @@
+{
+  "compileOnSave":false,
+  "buildOnSave": false,
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "ES5",
+    "module": "commonjs",
+    "sourceMap": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": false,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "allowJs": true
+  },
+  "filesGlob": [
+    "typings/index.d.ts",
+    "index.ts",
+    "app.ts",
+    "routes/**/*.ts",
+    "utils/generate-cert.ts"
+  ],
+  "exclude": [
+      "node_modules"
+  ],
+  "atom": {
+    "rewriteTsconfig": false,
+    "formatOnSave": true
+  }
+}

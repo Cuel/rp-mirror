@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "chokidar": "registry:npm/chokidar#1.6.0+20160817083815",
+    "express": "registry:npm/express#4.14.0+20160815112707"
+  },
+  "globalDependencies": {
+    "node": "registry:dt/node#6.0.0+20160823142437"
+  }
+}
