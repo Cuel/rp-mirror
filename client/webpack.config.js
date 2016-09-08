@@ -30,12 +30,12 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: ['to-string', 'css'],
-        include: path.resolve(__dirname, 'src', 'components')
+        include: path.resolve(__dirname, 'src', 'app')
       },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style', 'css-loader'),
-        exclude: path.resolve(__dirname, 'src', 'components')
+        exclude: path.resolve(__dirname, 'src', 'app')
       }
     ]
   },
