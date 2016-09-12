@@ -13,13 +13,13 @@ const watcher = chokidar.watch(files, {
     ignoreInitial: true
 });
 
-let child, starting = false;
 watcher
     .on('add', startServer)
     .on('change', startServer)
     .on('unlink', startServer)
     .on('ready', startServer);
 
+let child, starting = false;
 function startServer() {
     function run() {
         let started = false;
