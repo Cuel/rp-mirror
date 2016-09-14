@@ -16,7 +16,7 @@
     "typings/index.d.ts",
     "index.ts",
     "app.ts",
-    "routes/**/*.ts",
+    "api/**/*.ts",
     "utils/generate-cert.ts"
   ],
   "exclude": [

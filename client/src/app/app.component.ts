@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import * as io from 'socket.io-client';
+import {SocketService} from './socket.service'
 
 @Component({
     selector: 'my-app',
@@ -14,13 +15,6 @@ import * as io from 'socket.io-client';
 })
 
 export class AppComponent {
-    constructor() {
-        const sock = io.connect()
-        let reloading = false;
-        sock.on('reload', () => {
-          if (reloading) return;
-          reloading = true;
-          window.location.reload()
-        });
-    }
+  constructor(_ss: SocketService) {
+  }
 }
