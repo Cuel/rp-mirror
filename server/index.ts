@@ -27,7 +27,7 @@ function startServer() {
 
         child = fork('run.js', [], <ForkOptions>{
             cwd: __dirname,
-            stdio: ['pipe', 'pipe', 'pipe']
+            stdio: ['pipe', 'pipe', 'pipe', 'ipc']
         });
 
         const onExit = code => {
