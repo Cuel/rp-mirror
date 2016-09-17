@@ -3,7 +3,7 @@
   "buildOnSave": false,
   "compilerOptions": {
     "moduleResolution": "node",
-    "target": "ES5",
+    "target": "ES6",
     "module": "commonjs",
     "sourceMap": true,
     "emitDecoratorMetadata": false,
@@ -13,11 +13,12 @@
     "allowJs": true
   },
   "filesGlob": [
-    "typings/index.d.ts",
     "index.ts",
     "app.ts",
+    "typings/index.d.ts",
     "api/**/*.ts",
-    "utils/generate-cert.ts"
+    "handlers/**/*.ts",
+    "../shared/**/*.ts"
   ],
   "exclude": [
       "node_modules"

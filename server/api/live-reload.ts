@@ -1,19 +1,28 @@
 import { resolve } from 'path';
 import * as chokidar from 'chokidar';
-import { EventEmitter } from 'events';
 
-class ReloadEmitter extends EventEmitter { };
-export const reloadEmitter = new ReloadEmitter();
-export const RELOAD = 'reload';
+const fnMap = new Map<string, Function>();
+const emit = () => fnMap.forEach(v => {
+    if (v instanceof Function) v();
+});
 
-const watcher = chokidar.watch('public/**/*.js', {
+chokidar.watch('public/**/*.js', {
     cwd: resolve(__dirname, '..', '..'),
     awaitWriteFinish: false,
     ignoreInitial: true
-});
-
-const emit = () => reloadEmitter.emit(RELOAD);
-watcher
+})
     .on('add', emit)
     .on('change', emit)
     .on('unlink', emit)
+
+export function registerOnFileChange(id: string, callback: Function): boolean {
+    if (fnMap.has(id)) return false;
+    fnMap.set(id, callback);
+    return true;
+}
+
+export function unregisterOnFileChanged(id: string): boolean {
+    if (!fnMap.has(id)) return false;
+    fnMap.delete(id);
+    return true;
+}

@@ -4,6 +4,7 @@
     "express": "registry:npm/express#4.14.0+20160815112707"
   },
   "globalDependencies": {
+    "core-js": "registry:dt/core-js#0.0.0+20160914114559",
     "node": "registry:dt/node#6.0.0+20160823142437"
   }
 }

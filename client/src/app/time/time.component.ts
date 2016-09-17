@@ -33,6 +33,6 @@ export class TimeComponent {
     }
 
     get time() {
-        return `${this._date.toLocaleTimeString().slice(0, 5)}`
+        return this._date.toLocaleTimeString().slice(0, 5);
     }
 }

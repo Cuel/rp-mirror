@@ -6,9 +6,9 @@ import {SocketService} from './socket.service'
     selector: 'my-app',
     template: `
       <section class="pure-g">
-        <div class="pure-u-1-2 half-height"><h1>Hi</h1></div>
-        <rp-time class="pure-u-1-2 half-height"><h1>Hi</h1></rp-time>
-        <div class="pure-u-1 half-height"><h1>Hi</h1></div>
+        <div class="pure-u-1-2 half-height"><h1>hi</h1></div>
+        <rp-time class="pure-u-1-2 half-height"></rp-time>
+        <div class="pure-u-1 half-height"><h1></h1></div>
       </section>
     `,
     styles: [require('./app.css')]

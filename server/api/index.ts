@@ -1,7 +1,17 @@
-import { reloadEmitter, RELOAD } from './live-reload'
+import { registerOnFileChange, unregisterOnFileChanged } from './live-reload';
+import { EVENTS } from '../../shared/events';
 
-export function registerIo(io) {
-    io.sockets.on('connection', socket => {
-        reloadEmitter.on(RELOAD, () => socket.emit(RELOAD));
-    });
+function registerSocket(socket: SocketIO.Socket) {
+    const id = socket.id;
+    registerOnFileChange(id, () => socket.emit(EVENTS.reload));
+}
+
+function unregisterSocket(socket: SocketIO.Socket) {
+    const id = socket.id;
+    unregisterOnFileChanged(id);
+}
+
+export function registerIo(io: SocketIO.Server): void {
+    io.sockets.on('connection', registerSocket);
+    io.sockets.on('disconnect', unregisterSocket);
 }
