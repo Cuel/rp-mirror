@@ -3,6 +3,7 @@ import { readFileSync } from 'fs';
 import * as express from 'express';
 import { listen as ioListen } from 'socket.io';
 import { registerIo } from './api'
+import { init } from './handlers/weather'
 
 const PORT = process.env.PORT || 8080;
 
@@ -27,3 +28,5 @@ const server = https.createServer(options, app).listen(PORT, 'localhost', functi
 
 const io = ioListen(server);
 registerIo(io);
+
+init(300000)

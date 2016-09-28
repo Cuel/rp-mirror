@@ -10,7 +10,7 @@ import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/
     `,
     styles: [`
       article {margin: 1em 2em 0 0;}
-      article > * {margin: 0; text-align: right;}
+      h4, h1 {margin: 0; text-align: right;}
     `],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

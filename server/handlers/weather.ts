@@ -1,6 +1,7 @@
 const compose: any = require('lodash.flow');
 const unirest: any = require('unirest');
 import { IWeatherDates } from '../../shared/weather.interface';
+import { registerWeatherUpdater } from '../api/weather';
 
 interface ISmhiWeaherSeries {
     validTime: string;
@@ -18,19 +19,19 @@ function buildUrl(url: string): string {
     return `${URL_PREFIX}${url}${URL_SUFFIX}`;
 }
 
-const cleanSmhiData = compose([
-    filterPreviousHours,
-    limitToFourDays,
-    convertTimeSeries,
-    nestByDay
-]);
+function getAndConvertSmhiWeatherData() {
+    return new Promise((resolve, reject) => {
+        unirest.get(buildUrl(KUNGSHOLMEN))
+            .end((response) => {
+                if (response.ok && response.body) {
+                    const t: ISmhiWeaherSeries[] = response.body.timeSeries;
+                    resolve(cleanSmhiData(t));
+                } else {
+                    reject(response.error);
+                }
+            })
+    })
 
-export function get() {
-    unirest.get(buildUrl(KUNGSHOLMEN))
-        .end((response) => {
-            const t: ISmhiWeaherSeries[] = response.body.timeSeries;
-            console.log(cleanSmhiData(t));
-        })
 }
 
 function filterPreviousHours(timeSeries: ISmhiWeaherSeries[]) {
@@ -95,4 +96,24 @@ function isSameDay(date1: Date, date2: Date) {
         date1.getMonth() === date2.getMonth() &&
         date1.getDate() === date2.getDate();
     return ret;
+}
+
+const cleanSmhiData = compose([
+    filterPreviousHours,
+    limitToFourDays,
+    convertTimeSeries,
+    nestByDay
+]);
+
+export function init(delay: number) {
+    const updater = registerWeatherUpdater();
+
+    function get() {
+        getAndConvertSmhiWeatherData()
+            .then((data: IWeatherDates[][]) => updater(data))
+            .catch(e => console.error(e));
+    }
+    get()
+
+    setInterval(get, delay);
 }
