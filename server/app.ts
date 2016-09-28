@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import * as express from 'express';
 import { listen as ioListen } from 'socket.io';
 import { registerIo } from './api'
-import { init } from './handlers/weather'
+import { init as weatherInit } from './handlers/weather'
 
 const PORT = process.env.PORT || 8080;
 
@@ -23,10 +23,10 @@ app.get('/', (req: express.Request, res: express.Response) => {
 
 const server = https.createServer(options, app).listen(PORT, 'localhost', function() {
     console.log(`Server listening on ${PORT}`);
-    process.send('server:started');
+    process.send && process.send('server:started');
 });
 
 const io = ioListen(server);
 registerIo(io);
 
-init(300000)
+weatherInit(300000);

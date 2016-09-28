@@ -13,16 +13,17 @@ interface IWeather extends IWeatherDates {
       <article *ngIf="weather">
         <section class="day" *ngFor="let date of weather">
             <div class="hour" *ngFor="let hour of date">
-              <p>{{convertTime(hour.date)}}</p>
               <i class="wi" [ngClass]="hour.weatherIcon"></i>
+              <p>{{convertTime(hour.date)}}</p>
             </div>
           </section>
       </article>
     `,
     styles: [`
+      :host {font-size: 180%;}
       article {margin: 1em 0 0 1em;}
       .day {display: flex; flex-direction: row; flex-wrap: wrap;}
-      .hour {display: flex; height: 64px; width: 64px; flex-direction: column; align-items: center;}
+      .hour {display: flex; height: 64px; width: 3em; flex-direction: column; align-items: center;}
       .hour p {font-size: 60%; margin-top: 0.4em; flex-grow: 2;}
       .hour i {font-size: 1em; width: 1em; flex-grow: 1; text-align: center;}
     `]
@@ -40,11 +41,11 @@ export class WeatherComponent {
     }
 
     onWeatherUpdate(data: IWeatherDates[][]) {
-      this.weather = data.map(IWArr => {
+      this.weather = [data.map(IWArr => {
         return IWArr.map(v => {
           return this.setupWeatherDate(v);
         })
-      });
+      }).shift()];
     }
 
     private setupWeatherDate(d: IWeatherDates): IWeather {
