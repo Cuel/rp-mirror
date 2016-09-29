@@ -1,3 +1,8 @@
+export interface IWeatherJson {
+    location: string;
+    weather: IWeatherDates[][];
+}
+
 export interface IWeatherDates {
     date: Date;
     temperature?: number;

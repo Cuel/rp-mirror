@@ -1,6 +1,6 @@
 const compose: any = require('lodash.flow');
 const unirest: any = require('unirest');
-import { IWeatherDates } from '../../shared/weather.interface';
+import { IWeatherJson, IWeatherDates } from '../../shared/weather.interface';
 import { registerWeatherUpdater } from '../api/weather';
 
 interface ISmhiWeaherSeries {
@@ -14,6 +14,7 @@ interface ISmhiWeaherSeries {
 const URL_PREFIX = 'http://opendata-download-metfcst.smhi.se/api/category/pmp2g/version/2/geotype/point/';
 const URL_SUFFIX = '/data.json';
 const KUNGSHOLMEN = 'lon/18.01/lat/59.33';
+const LOCATION = 'Kungsholmen, Stockholm';
 
 function buildUrl(url: string): string {
     return `${URL_PREFIX}${url}${URL_SUFFIX}`;
@@ -110,7 +111,12 @@ export function init(delay: number) {
 
     function get() {
         getAndConvertSmhiWeatherData()
-            .then((data: IWeatherDates[][]) => updater(data))
+            .then((data: IWeatherDates[][]) => {
+                updater(<IWeatherJson>{
+                    location: LOCATION,
+                    weather: data
+                })
+            })
             .catch(e => console.error(e));
     }
     get()

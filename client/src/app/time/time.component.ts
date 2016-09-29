@@ -1,17 +1,18 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import {Component, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 
 @Component({
     selector: 'rp-time',
     template: `
       <article>
-        <h4>{{date | date : 'fullDate'}}</h4>
+        <h4>{{date | date : 'fullDate' | reverseSlice:5 | capitalize}}</h4>
         <h1>{{time}}</h1>
       </article>
     `,
     styles: [`
       article {margin: 2em 2em 0 0;}
-      h4, h1 {margin: 0; text-align: right;}
-      h1 {margin-top: 0.6em; font-size: 160%;}
+      h4, h1 {margin: 0; text-align: center;}
+      h4 {font-size: 180%;}
+      h1 {margin-top: 0.2em; font-size: 300%;}
     `],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
