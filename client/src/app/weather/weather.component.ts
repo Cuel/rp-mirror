@@ -9,39 +9,38 @@ interface IWeather extends IWeatherDates {
 @Component({
     selector: 'rp-weather',
     template: `
-      <article *ngIf="weather">
-        <section class="day" *ngFor="let date of weather; let i = index">
-          <div *ngIf="i == 0">
+<article *ngIf="weather">
+    <section class="day" *ngFor="let date of weather; let i = index">
+        <div class="pure-g" *ngIf="i == 0">
             <h4 class="pure-u-1">{{location}}</h4>
-            <div class="hour" *ngFor="let hour of date; let idx = index">
-              <div class="now pure-g" *ngIf="idx == 0">
-                  <div class="pure-u-1-3">
-                    <i class="wi" [ngClass]="hour.weatherIcon"></i>
-                    <div>
-                      <span class="temp">{{getTemp(hour.temperature)}}</span>
-                      <sup class="celsius">°C</sup>
+            <div [ngClass]="idx > 0 && idx % 2 == 0 ? 'pure-u-1-12' : 'pure-u-1'" *ngFor="let hour of date; let idx = index">
+                <div class="pure-g now" *ngIf="idx == 0">
+                    <div class="pure-u-2-5">
+                        <i class="wi" [ngClass]="hour.weatherIcon"></i>
+                        <span class="temp">{{hour.temperature | toFixed:0}}</span>
+                        <sup class="celsius">°C</sup>
                     </div>
-                  </div>
-                  <div class="pure-u-2-3">
-                    <ul>
-                        <li>vind: {{hour.windSpeed | toFixed:0}} m/s</li>
-                        <li>fuktighet: {{hour.humidity}}%</li>
-                    </ul>
-                  </div>
-              </div>
+                    <div class="pure-u-3-5">
+                        <ul>
+                            <li>vind: {{hour.windSpeed | toFixed:0}} m/s</li>
+                            <li>fuktighet: {{hour.humidity}}%</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-          </div>
-        </section>
-      </article>
-    `,
+        </div>
+    </section>
+</article>
+`,
     styles: [`
-      article {margin: 2em 0 0 2em;}
-      h4 {margin: 0; font-size: 180%;}
-      .now > div {display: flex; align-items: center;}
-      .now .wi, .now .temp {font-size: 150%;}
-      .now .celsius {font-size: 60%; top: -1.1em;}
-      .now ul {font-size: 80%; list-style-type: none;}
-      .now ul > li {margin: 0.2em 0;}
+        article {margin: 2em 0 0 2em;}
+        h4 {margin: 0; font-size: 170%;}
+        .now > div {display: flex; align-items: baseline;}
+        .now .wi {font-size: 280%;}
+        .now .temp  {margin-left: 0.4em;font-size: 300%;}
+        .now .celsius {font-size: 100%; top: -1.4em;}
+        .now ul {list-style-type: none; padding-left: 2.4em; margin: 0.4em 0;}
+        .now ul > li {margin: 0.2em 0;}
     `]
 })
 
@@ -60,10 +59,6 @@ export class WeatherComponent {
         return d.toLocaleTimeString().slice(0, 2);
     }
 
-    getTemp(temp: number) {
-        return temp.toFixed();
-    }
-
     onWeatherUpdate(data: IWeatherJson) {
         this.location = data.location;
         this.weather = data.weather.map(IWArr => {
@@ -71,6 +66,11 @@ export class WeatherComponent {
                 return this.setupWeatherDate(v);
             })
         });
+    }
+
+    formatHour(d: Date) {
+        const h = d.getHours();
+        return h < 10 ? `0${h}:00` : `${h}:00`;
     }
 
     private setupWeatherDate(d: IWeatherDates): IWeather {

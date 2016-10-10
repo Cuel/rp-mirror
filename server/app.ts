@@ -21,7 +21,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
     res.sendFile('index.html');
 });
 
-const server = https.createServer(options, app).listen(PORT, 'localhost', function() {
+const server = https.createServer(options, app).listen(PORT/*, 'localhost'*/, function() {
     console.log(`Server listening on ${PORT}`);
     process.send && process.send('server:started');
 });

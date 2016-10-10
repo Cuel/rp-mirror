@@ -14,7 +14,7 @@ interface ISmhiWeaherSeries {
 const URL_PREFIX = 'http://opendata-download-metfcst.smhi.se/api/category/pmp2g/version/2/geotype/point/';
 const URL_SUFFIX = '/data.json';
 const KUNGSHOLMEN = 'lon/18.01/lat/59.33';
-const LOCATION = 'Kungsholmen, Stockholm';
+const LOCATION = 'Kungsholmen';
 
 function buildUrl(url: string): string {
     return `${URL_PREFIX}${url}${URL_SUFFIX}`;
@@ -74,7 +74,7 @@ function convertTimeSeries(timeSeries: ISmhiWeaherSeries[]): IWeatherDates[] {
 
 function nestByDay(timeSeries: IWeatherDates[]): IWeatherDates[][] {
     const ret = [];
-    let arr = []
+    let arr = [];
     let item = timeSeries.shift();
     let curDay: Date = item.date;
 
@@ -92,11 +92,9 @@ function nestByDay(timeSeries: IWeatherDates[]): IWeatherDates[][] {
 }
 
 function isSameDay(date1: Date, date2: Date) {
-    const ret =
-        date1.getFullYear() === date2.getFullYear() &&
+    return date1.getFullYear() === date2.getFullYear() &&
         date1.getMonth() === date2.getMonth() &&
         date1.getDate() === date2.getDate();
-    return ret;
 }
 
 const cleanSmhiData = compose([

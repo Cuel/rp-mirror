@@ -11,8 +11,8 @@ import {Component, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/co
     styles: [`
       article {margin: 2em 2em 0 0;}
       h4, h1 {margin: 0; text-align: center;}
-      h4 {font-size: 180%;}
-      h1 {margin-top: 0.2em; font-size: 300%;}
+      h4 {font-size: 120%;}
+      h1 {font-size: 320%;}
     `],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
