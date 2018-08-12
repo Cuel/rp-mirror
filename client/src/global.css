@@ -1,9 +1,0 @@
-html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
-  font-family: 'Noto serif', sans-serif;
-}
-
-body {
-  font-size: 200%;
-  background-color: #000;
-  color: #FFF;
-}
