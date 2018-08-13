@@ -1,5 +1,15 @@
 import * as React from 'react';
-import './Date.css'
+import {DateView} from './Date';
+import { pad } from '../util/StringUtils';
+
+export interface IDateData {
+    seconds: string,
+    minutes: string,
+    hours: string,
+    day: string,
+    month: string,
+    date: string,
+}
 
 class DateComponent extends React.Component<object, { date: Date }> {
     private intervalId: NodeJS.Timer;
@@ -21,12 +31,7 @@ class DateComponent extends React.Component<object, { date: Date }> {
     }
 
     public render() {
-        const { hours, minutes, seconds, date, day } = this.getDateData()
-        return (<div>
-            <p className="date">{date}</p>
-            <p className="time">{this.capitalize(day)}, {hours}:{minutes}:{seconds}</p>
-            <p>{this.getDateData().month}</p>
-        </div>)
+        return <DateView date={this.getDateData()} />
     }
 
 
@@ -34,25 +39,16 @@ class DateComponent extends React.Component<object, { date: Date }> {
         this.setState({ date: new Date() })
     }
 
-    private capitalize(str: string) {
-        return `${str.charAt(0).toUpperCase()}${str.slice(1)}`
-    }
-
     private getDateData() {
         const d = this.state.date
         return {
-            seconds: this.pad(d.getSeconds()),
-            minutes: this.pad(d.getMinutes()),
-            hours: this.pad(d.getHours()),
+            seconds: pad(d.getSeconds()),
+            minutes: pad(d.getMinutes()),
+            hours: pad(d.getHours()),
             day: d.toLocaleDateString('sv-SE', { weekday: 'long' }),
-            month: d.toLocaleDateString('sv-SE', {month: 'long'}),
+            month: d.toLocaleDateString('sv-SE', { month: 'long' }),
             date: d.toLocaleDateString('sv-SE')
         }
-    }
-
-    private pad(nr: number): string {
-        if (nr < 10) return `0${nr}`
-        return `${nr}`
     }
 
 }
