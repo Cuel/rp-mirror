@@ -1,7 +1,6 @@
 .idea
 server/ssl
 typings
-public/**/*
 
 # Logs
 logs
