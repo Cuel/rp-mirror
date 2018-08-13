@@ -1,0 +1,8 @@
+{
+    "en-US": {
+        "full.date": "{} the {} of {}"
+    },
+    "sv-SE": {
+        "full.date": "{} den {} {}"
+    }
+}
