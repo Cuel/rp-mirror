@@ -1,4 +1,5 @@
-const translations = {
+import { ITranslations } from '../util/Translate';
+const translations: ITranslations = {
     "default": {
         "full.date": "{day} the {date} of {month}"
     },

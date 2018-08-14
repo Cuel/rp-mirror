@@ -1,6 +1,12 @@
 import * as React from 'react';
-import {DateView} from './Date';
+import { DateView } from './Date';
 import { pad } from '../util/StringUtils';
+import { ITranslate, ITranslations } from '../util/Translate';
+
+interface IComponentContext {
+    t: ITranslate
+    locale: keyof ITranslations
+}
 
 export interface IDateData {
     seconds: string,
@@ -11,10 +17,10 @@ export interface IDateData {
     date: string,
 }
 
-class DateComponent extends React.Component<object, { date: Date }> {
+class DateComponent extends React.Component<IComponentContext, { date: Date }>  {
     private intervalId: NodeJS.Timer;
 
-    constructor(props: object) {
+    constructor(props: IComponentContext) {
         super(props)
 
         this.state = {
@@ -40,14 +46,15 @@ class DateComponent extends React.Component<object, { date: Date }> {
     }
 
     private getDateData() {
+        const { locale } = this.props
         const d = this.state.date
         return {
             seconds: pad(d.getSeconds()),
             minutes: pad(d.getMinutes()),
             hours: pad(d.getHours()),
-            day: d.toLocaleDateString('sv-SE', { weekday: 'long' }),
-            month: d.toLocaleDateString('sv-SE', { month: 'long' }),
-            date: d.toLocaleDateString('sv-SE')
+            day: d.toLocaleDateString(locale, { weekday: 'long' }),
+            month: d.toLocaleDateString(locale, { month: 'long' }),
+            date: d.toLocaleDateString(locale)
         }
     }
 
