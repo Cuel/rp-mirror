@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/express": "^4.16.0",
+    "axios": "^0.18.0",
+    "express": "^4.16.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-scripts-ts": "2.17.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
+    "server": "node -r ts-node/register ./server",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
