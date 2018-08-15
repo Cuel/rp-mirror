@@ -1,15 +1,18 @@
 import * as React from 'react';
 import { capitalize } from '../util/StringUtils';
 import './Date.css'
-import { IDateData } from './index';
+import { IDateData } from '.';
+import { ITranslate } from '../util/Translate';
 
-export const DateView = (props: { date: IDateData }) => {
-    const { hours, minutes, seconds, date, day } = props.date
+export const DateView = (props: { t: ITranslate, date: IDateData }) => {
+    const t = props.t
+    const { hours, minutes, seconds, month, date, day } = props.date
+    const dateString = capitalize(t('full.date', { day, month, date }));
 
     return (
-        <div>
-            <p className="App-date__date">{date}</p>
-            <p className="App-date__time">{capitalize(day)}, {hours}:{minutes}:{seconds}</p>
+        <div className="App-date">
+            <p className="App-date__date">{dateString}</p>
+            <p className="App-date__time">{hours}:{minutes}:{seconds}</p>
         </div>
     )
 

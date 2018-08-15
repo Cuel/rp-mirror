@@ -1,7 +1,18 @@
+.App-date {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
 .App-date__date {
-    font-size: 3em;
+    align-self: center;
+    font-size: 2em;
+    margin: 0;
+    padding-bottom: 0.5em;
 }
 
 .App-date__time {
+    align-self: center;
     font-size:3em;
+    margin: 0;
 }

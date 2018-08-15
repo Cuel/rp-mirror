@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { DateView } from './Date';
 import { pad } from '../util/StringUtils';
-import { ITranslate, ITranslations } from '../util/Translate';
+import { ILocale, translateFactory } from '../util/Translate';
+import translations from './translations';
 
 interface IComponentContext {
-    t: ITranslate
-    locale: keyof ITranslations
+    locale: ILocale
 }
 
 export interface IDateData {
@@ -17,12 +17,12 @@ export interface IDateData {
     date: string,
 }
 
-class DateComponent extends React.Component<IComponentContext, { date: Date }>  {
+
+export class DateComponent extends React.Component<IComponentContext, { date: Date }>  {
     private intervalId: NodeJS.Timer;
 
     constructor(props: IComponentContext) {
         super(props)
-
         this.state = {
             date: new Date()
         }
@@ -37,9 +37,9 @@ class DateComponent extends React.Component<IComponentContext, { date: Date }>  
     }
 
     public render() {
-        return <DateView date={this.getDateData()} />
+        const t = translateFactory(translations, this.props.locale)
+        return <DateView t={t} date={this.getDateData()} />
     }
-
 
     private updateDate() {
         this.setState({ date: new Date() })
@@ -52,12 +52,10 @@ class DateComponent extends React.Component<IComponentContext, { date: Date }>  
             seconds: pad(d.getSeconds()),
             minutes: pad(d.getMinutes()),
             hours: pad(d.getHours()),
+            date: pad(d.getDate()),
             day: d.toLocaleDateString(locale, { weekday: 'long' }),
             month: d.toLocaleDateString(locale, { month: 'long' }),
-            date: d.toLocaleDateString(locale)
         }
     }
 
 }
-
-export default DateComponent

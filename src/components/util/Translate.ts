@@ -1,13 +1,13 @@
 interface IKeyValue { [key: string]: string }
 
-export interface ITranslate {
-    <T, K1 extends keyof T, K2 extends string & keyof T[K1]>(key: K2, interpolate?: IKeyValue): string
-}
+export type ITranslate = <T, K1 extends keyof T, K2 = keyof T[K1]>(key: K2, interpolate?: IKeyValue) => string
 
 export interface ITranslations {
     default: IKeyValue
     "sv-SE": IKeyValue
 }
+
+export type ILocale = keyof ITranslations
 
 export const translateFactory = <T>(translations: T, language: keyof ITranslations = 'default'): ITranslate => {
 
