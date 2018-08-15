@@ -1,7 +1,7 @@
 import * as React from 'react'
 import './App.css'
 import { DateComponent } from './components/date';
-import { ITranslations } from './components/util/Translate';
+import { ITranslations } from './util/Translate';
 
 const locale: keyof ITranslations = 'sv-SE'
 

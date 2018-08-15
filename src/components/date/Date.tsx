@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { capitalize } from '../util/StringUtils';
 import './Date.css'
 import { IDateData } from '.';
-import { ITranslate } from '../util/Translate';
+import { ITranslate } from 'src/util/Translate';
+import { capitalize } from '../../util/StringUtils';
 
 export const DateView = (props: { t: ITranslate, date: IDateData }) => {
     const t = props.t

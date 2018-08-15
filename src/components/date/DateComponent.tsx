@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { DateView } from './Date';
-import { pad } from '../util/StringUtils';
-import { ILocale, translateFactory } from '../util/Translate';
 import translations from './translations';
+import { ILocale, translateFactory } from '../../util/Translate';
+import { pad } from '../../util/StringUtils';
 
 interface IComponentContext {
     locale: ILocale
