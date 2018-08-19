@@ -15,6 +15,7 @@
     "no-console": false,
     "object-literal-sort-keys": false,
     "curly": false,
-    "ordered-imports": false
+    "ordered-imports": false,
+    "member-access": [true, "no-public"]
   }
 }

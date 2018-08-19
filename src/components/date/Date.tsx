@@ -4,9 +4,8 @@ import { IDateData } from '.';
 import { ITranslate } from 'src/util/Translate';
 import { capitalize } from '../../util/StringUtils';
 
-export const DateView = (props: { t: ITranslate, date: IDateData }) => {
-    const t = props.t
-    const { hours, minutes, seconds, month, date, day } = props.date
+export const DateView = (props: { t: ITranslate, dateData: IDateData }) => {
+    const { t, dateData: { hours, minutes, seconds, month, date, day } } = props
     const dateString = capitalize(t('full.date', { day, month, date }));
 
     return (

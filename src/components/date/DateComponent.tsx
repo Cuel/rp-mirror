@@ -28,17 +28,17 @@ export class DateComponent extends React.Component<IComponentContext, { date: Da
         }
     }
 
-    public componentWillMount() {
+    componentWillMount() {
         this.intervalId = setInterval((() => this.updateDate()), 100)
     }
 
-    public componentWillUnmount() {
+    componentWillUnmount() {
         clearInterval(this.intervalId)
     }
 
-    public render() {
+    render() {
         const t = translateFactory(translations, this.props.locale)
-        return <DateView t={t} date={this.getDateData()} />
+        return <DateView t={t} dateData={this.getDateData()} />
     }
 
     private updateDate() {
