@@ -1,6 +1,0 @@
-.half-height {
-  min-height: calc(50vh);
-}
-
-h1 {text-align: center; margin-bottom: 0;}
-.greeting {position: absolute; bottom: 2em;}
