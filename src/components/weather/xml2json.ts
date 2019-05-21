@@ -1,10 +1,7 @@
 const xmlToJson = (xml: any) => {
-  // Create the return object
   let obj: any = {};
 
   if (xml.nodeType == 1) {
-    // element
-    // do attributes
     if (xml.attributes.length > 0) {
       obj["@attributes"] = {};
       for (let j = 0; j < xml.attributes.length; j++) {

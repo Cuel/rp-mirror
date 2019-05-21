@@ -1,27 +1,32 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import "./components/weather";
+import React, { useEffect, useState } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import Weather from './components/weather'
+import Date from './components/time/Date'
+import Time from './components/time/Time'
+import DateContext from './components/time/DateContext'
 
 const App: React.FC = () => {
+  const [date, setDate] = useState(new global.Date())
+
+  useEffect(() => {
+    const interval = setInterval(() => setDate(new global.Date()), 1000)
+    return () => clearInterval(interval)
+  }, [date])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DateContext.Provider value={date}>
+        <div className="App-date">
+          <Date />
+        </div>
+        <div className="App-time">
+          <Time />
+        </div>
+      </DateContext.Provider>
+      <Weather />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
